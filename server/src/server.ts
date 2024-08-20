@@ -16,7 +16,13 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: process.env.CLIENT_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  }
+));
 app.use(express.json());
 
 // Serve static files from the 'uploads' directory

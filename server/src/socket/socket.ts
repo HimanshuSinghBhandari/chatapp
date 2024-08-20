@@ -1,5 +1,5 @@
 // src/socket.ts
-import { Server as SocketIOServer } from 'socket.io';
+import { Server as SocketIOServer, ServerOptions } from 'socket.io';
 import http from 'http';
 import { db } from '../db/db';
 import { and, eq } from 'drizzle-orm';
@@ -8,12 +8,16 @@ import fs from 'fs';
 import path from 'path';
 
 export function setupSocket(server: http.Server) {
-  const io = new SocketIOServer(server, {
+    const corsOptions: Partial<ServerOptions> = {
     cors: {
-      origin: process.env.CLIENT_URL || 'http://localhost:3000',
-      methods: ['GET', 'POST']
+      origin: process.env.CLIENT_URL,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      credentials:true,
     }
-  });
+  };
+
+  const io = new SocketIOServer(server, corsOptions);
+
 
   io.on('connection', (socket) => {
     const userId = socket.handshake.auth.userId;
