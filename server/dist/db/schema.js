@@ -18,4 +18,5 @@ exports.messages = (0, pg_core_1.pgTable)('messages', {
     timestamp: (0, pg_core_1.timestamp)('timestamp').defaultNow(),
     isRead: (0, pg_core_1.boolean)('is_read').default(false),
     mediaUrl: (0, pg_core_1.text)('media_url'),
+    mediaType: (0, pg_core_1.text)('media_type'),
 });
