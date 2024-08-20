@@ -24,7 +24,7 @@ const LeftPanel: React.FC = () => {
     const fetchUsers = async () => {
       if (currentUser) {
         try {
-          const response = await axios.get(`http://localhost:3001/users/${currentUser.id}`);
+          const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/users/${currentUser.id}`);
           setUsers(response.data);
         } catch (error) {
           console.error('Error fetching users:', error);

@@ -53,7 +53,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     if (currentUser) {
-      const newSocket = io('http://localhost:3001', {
+      const newSocket = io(import.meta.env.VITE_SERVER_URL, {
         auth: { userId: currentUser.id }
       });
       setSocket(newSocket);
@@ -160,7 +160,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchMessages = async (userId: number, otherUserId: number) => {
     try {
-      const response = await axios.get(`http://localhost:3001/messages`, {
+      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/messages`, {
         params: { userId, otherUserId, limit: 20, offset: 0 },
       });
       setMessages(response.data);

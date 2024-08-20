@@ -15,7 +15,7 @@ const UsernamePage: React.FC = () => {
       // Handle login
       if (email.trim() && password.trim()) {
         try {
-          const response = await axios.post('http://localhost:3001/login', {
+          const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/login`, {
             email,
             password,
           });
@@ -30,7 +30,7 @@ const UsernamePage: React.FC = () => {
       // Handle signup
       if (username.trim() && email.trim() && password.trim()) {
         try {
-          const response = await axios.post('http://localhost:3001/users', {
+          const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/users`, {
             username,
             email,
             password,
